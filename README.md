@@ -1,2 +1,1 @@
-# BIO331GeoSpatial
-Geospatial lessons for BIO331- Notes and R Scripts
+BIO331 Course Repository for Spatial Bioinformatics Unit
