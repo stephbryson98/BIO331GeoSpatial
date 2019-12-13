@@ -218,7 +218,7 @@ print(files)
 gri.files = files[grep('.gri', files)] #Only need one of the two files to read. R 'raster::stack()' finds the other.
 
 mods = stack(gri.files)
-names(mods) = c('current','2070_8.5') ## Verify this is the same order as in gri.files object
+names(mods) = c('current', '2070_2.6', '2070_8.5') ## Verify this is the same order as in gri.files object
 plot(mods)
 
 library(ggplot2)
