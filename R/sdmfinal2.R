@@ -85,10 +85,6 @@ dist_plot = ggplot() +
   theme_bw() + 
   scale_fill_gradientn(colours=c('darkred', 'grey', 'navy', 'green'),
                        na.value = "black")
-ggsave(dist_plot, 
-       filename = paste("figures/", taxon, "_data.png", sep=""),
-       height=7.25, width = 7.25, units='in',
-       dpi = 300)
 
 
 # ENMevaluate
@@ -118,10 +114,7 @@ max_plot = ggplot() +
   theme_bw() + 
   scale_fill_gradientn(colours=viridis::viridis(99),
                        na.value = "black")
-ggsave(max_plot, 
-       filename = paste("figures/", taxon, "_maxent.png", sep=""),
-       height=7.25, width = 7.25, units='in',
-       dpi = 300)
+
 writeRaster(pr, 
             filename = paste('data/', taxon, '_model'), 
             overwrite=TRUE)
@@ -153,7 +146,7 @@ ggsave(thr_plot,
 
 
 
-# ### Extend to Future Climate ### #
+# ### Extend to Future Climate ### # only 85
 
 
 
