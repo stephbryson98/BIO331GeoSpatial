@@ -41,17 +41,27 @@ wc_future85 = future = getData('CMIP5',
                                year=70, 
                                path = path)
 
+wc_future26 = future = getData('CMIP5', 
+                               var = 'bio', 
+                               res = res, 
+                               rcp = 26, 
+                               model='CC', 
+                               year =70, 
+                               path = path)
 
 #standardize names
+names(wc_future26) = names(wc)
 names(wc_future85) = names(wc)
 
 #subset predictor variables
 preds = wc[[predvars]]
+preds26 = wc_future26[[predvars]]
 preds85 = wc_future85[[predvars]]
 
 # crop to study area
 ext = extent(-90, -10, -70, 20) 
 preds = crop(preds, ext)
+preds26 = crop(preds26, ext)
 preds85 = crop(preds85, ext)
 
 preds_df = as.data.frame(preds, xy=TRUE) # data frame for plotting
@@ -160,6 +170,7 @@ ggsave(thr_plot,
 
 #heatmap
 
+
 pr_future85 = predict(preds85, 
                       eval@models[[bestmod]], 
                       type = 'cloglog')
@@ -177,6 +188,7 @@ ggsave(max_plot85,
        filename = paste("figures/", taxon, "_maxent85.png", sep=""),
        height=7.25, width = 7.25, units='in',
        dpi = 300)
+
 
 
 writeRaster(pr_future85, 
