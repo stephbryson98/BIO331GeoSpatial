@@ -166,10 +166,24 @@ ggsave(thr_plot,
 # ### Extend to Future Climate ### #
 
 
+pr_future26 = predict(preds26, 
+                      eval@models[[bestmod]], 
+                      type = 'cloglog')
+pr_df26 = as.data.frame(pr_future26, xy=T)
 
 
 #heatmap
-
+max_plot26 = ggplot() +
+  geom_raster(data = pr_df26, aes(x = x, y = y, fill = layer)) +
+  geom_point(data=sp_df, aes(x=longitude, y=latitude), col='red', cex=0.05) +
+  coord_quickmap() +
+  theme_bw() + 
+  scale_fill_gradientn(colours=viridis::viridis(99),
+                       na.value = "black")
+ggsave(max_plot26, 
+       filename = paste("figures/", taxon, "_maxent26.png", sep=""),
+       height=7.25, width = 7.25, units='in',
+       dpi = 300)
 
 pr_future85 = predict(preds85, 
                       eval@models[[bestmod]], 
@@ -189,7 +203,9 @@ ggsave(max_plot85,
        height=7.25, width = 7.25, units='in',
        dpi = 300)
 
-
+writeRaster(pr_future26, 
+            filename = paste('data/', taxon, '_model26'), 
+            overwrite=TRUE)
 
 writeRaster(pr_future85, 
             filename = paste('data/', taxon, '_model85'), 
