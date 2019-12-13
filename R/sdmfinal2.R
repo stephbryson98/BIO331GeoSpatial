@@ -50,7 +50,7 @@ preds = wc[[predvars]]
 preds85 = wc_future85[[predvars]]
 
 # crop to study area
-ext = extent(-125, -55, 20, 60) 
+ext = extent(40, 110, -10, 50) 
 preds = crop(preds, ext)
 preds85 = crop(preds85, ext)
 
