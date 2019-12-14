@@ -1,0 +1,26 @@
+#!/bin/bash
+
+echo "This is a test!"
+
+#Download a fastq file for a sequencing project
+fastq-dump -A "Ar73_R2.fastq.gz"
+
+#check the contents of the file
+head Ar73_R2.fastq.gz
+
+#Setup
+fastq-dump -A "Ar73_R2.fastq.gz" --split-3
+
+#Visualize Quailty
+fastqc Ar73_R2.fastq.gz
+
+#Conda install Abyss assembler and OpenMPI for parallelization
+conda install -c conda-forge openmpi
+conda install -c bioconda Abyss
+
+#Abyss
+abyss-pe name=fungus k=96 in='Ar73_R2.fastq.gz' np=8 # Run abyss with 8 parallel instances
+
+cat fungus-1.fa
+cat fungus-2.fa
+cat fungus-3.fa
